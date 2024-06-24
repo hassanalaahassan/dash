@@ -1,0 +1,9 @@
+.truncate-four-lines {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 5;
+  -webkit-box-orient: vertical;
+}
+.h-40 {
+  height: 40% !important;
+}

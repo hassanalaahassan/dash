@@ -1,0 +1,131 @@
+<div id="container" class="updateDialog all-dialog" >
+  <div class="dialog-design">
+    <div class="header d-flex justify-content-between align-items-center">
+     <span class="h3 fw-bold" >Update Appointment</span> <span class="fs-3 cursor-pointer" (click)="closeUpdate()"><i class="fa-solid fa-xmark"></i></span>
+
+     </div>
+    <div class="content">
+      <div>
+        <h4><span>The Appointment For </span>{{appointmentActions.email}}</h4>
+      </div>
+      <div class="body">
+        <form  [formGroup]="appointmentForm">
+          <div class="form-elment">
+            <div class="flex-column">
+              <label>Phone Number</label>
+            </div>
+              <div class="inputForm">
+                <i class="fa-solid fa-mobile"></i>
+                <input placeholder="01xxxxxxxxx" class="input" type="tel" formControlName="contactNumber">
+              </div>
+          </div>
+          <div class="form-elment">
+            <div class="flex-column">
+              <label>Appointment Type </label></div>
+              <div class="inputForm">
+                <i class="fa-brands fa-typo3"></i>
+                <input placeholder="Enter Your Donate Type " class="input" formControlName="appointmentType">
+              </div>
+          </div>
+          <div class="form-elment position-relative">
+            <div class="flex-column">
+              <label class="mb-5">Appointment Date </label></div>
+              <input type="date" class="form-control border-1 border-primary w-50 mt-4" formControlName="appointmentDate">
+          </div>
+          <div class="form-elment my-2">
+            <div class="flex-column">
+              <label>hospital ID </label></div>
+              <select  formControlName="hospitalId" class="w-50 p-2 rounded-2 cursor-pointer">
+                <option [value]="hospital.id" *ngFor="let hospital of myHospital" >{{hospital.frontMatter.title}}</option>
+              </select>
+          </div>
+          <div class="form-elment">
+            <div class="flex-column">
+              <label>Emergency</label></div>
+              <div class="inputFor">
+                <select class="w-50 p-2 rounded-2 cursor-pointer" formControlName="emergencyId">
+                  <option [value]="emergency.id" *ngFor="let emergency of myEmergency" >{{emergency.frontMatter.title}}</option>
+                </select>
+              </div>
+          </div>
+        </form>
+       </div>
+      <div class="action d-flex justify-content-between">
+        <button type="submit"  (click)="updateAppointment()" > Update</button>
+        <button class="cancel" (click)="closeUpdate()"> cancel</button>
+       </div>
+    </div>
+  </div>
+</div>
+<div id="container" class="deleteDialog all-dialog">
+  <div class="dialog-design">
+    <div class="header d-flex justify-content-between align-items-center">
+      <span class="h3 fw-bold">Cancel Appointment</span> <span class="fs-3 cursor-pointer" (click)="closeDelete()"><i class="fa-solid fa-xmark"></i></span>
+     </div>
+    <div class="content">
+      <div class="body d-flex align-items-center">
+        <i class="fa-solid fa-triangle-exclamation fs-1 pe-3 pe-lg-4"></i>  <p class="h3">Sure to cancel <span class=" text-capitalize text-black shadow-lg p-2 rounded-3">{{appointmentActions.email}}</span> Appointment?</p>
+       </div>
+      <div class="action d-flex justify-content-between">
+        <button (click)="deleteAppointment()"> Cancel</button>
+        <button class="cancel" (click)="closeDelete()"> cancel</button>
+       </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-12 stretch-card">
+    <div class="card hover-title">
+      <div class="card-body">
+        <h6 class="card-title my-header">All Appointments</h6>
+        <div class="table-responsive">
+          <table id="dataTableExample" class="table">
+            <thead>
+              <tr class=" text-capitalize">
+                <th>#</th>
+                <th>Donor account</th>
+                <th>Donor Number</th>
+                <th>hospital Title</th>
+                <th>emergency Title</th>
+                <th>donation Type</th>
+                <th>Appointment Date</th>
+
+                <th class="text-center">actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let appointment of myAppointments ; let i = index">
+                <td>{{i+1}}</td>
+                <td>{{appointment.email}}</td>
+                <td>{{appointment.contactNumber}}</td>
+                <td>{{findHospitalTitle(appointment.hospitalId)}}</td>
+                <td>{{findEmergencyTitle(appointment.emergencyId)}}</td>
+                <td>{{appointment.appointmentType}}</td>
+                <td>{{appointment.appointmentDate.split('T')[0]}}</td>
+                <td><div class="head d-flex justify-content-between align-items-baseline">
+                <button class="my-0 delete btn-12" (click)="openDelete(appointment)">
+                  <span>Delete</span>
+                </button>
+                <button class="update my-0 btn-12" (click)="openUpdate(appointment)" >
+                 <span>Update</span>
+                </button>
+                </div></td>
+              </tr>
+            </tbody>
+            <tfoot>
+              <tr>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<app-note [data]="parentData" class="my-note position-fixed" *ngIf="this._note.toggelNote"></app-note>

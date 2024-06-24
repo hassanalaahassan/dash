@@ -1,0 +1,211 @@
+<div class="h3 my-header mb-2">Review Blogs</div>
+  <owl-carousel-o [options]="customOptions" >
+
+    <ng-container *ngFor="let blog of myBlogs">
+      <ng-template carouselSlide>
+        <div class=" position-relative animate">
+          <img [src]="blog.frontMatter.images" [alt]="blog.frontMatter.title" height="200" class="rounded-2 shadow-sm" [title]="blog.frontMatter.title">
+          <div class="date-span disapeer rounded-2 text-center position-absolute w-100 bg-primary text-white top-0 bg-opacity-75 cursor-pointer start-0 p-2">
+            <span class=" text-truncate fw-bold">{{blog.frontMatter.title}}</span>
+          </div>
+          <div class="date-span disapeer left position-absolute w-auto bg-primary text-white bottom-0 bg-opacity-75 cursor-pointer start-0 p-2">
+            <span>{{blog.frontMatter.author.name}}</span>
+          </div>
+          <div class="text-white my-card bg-black bg-opacity-75 top-0 bottom-0 end-0 start-0 position-absolute p-3 h-100 w-100">
+            <div class="h5 fw-bold text-truncate">{{blog.frontMatter.title}}</div>
+            <div class="body mt-2 d-flex flex-column">
+              <p class=" truncate-three-lines">{{blog.frontMatter.summary}}</p>
+              <div class="d-flex justify-content-between align-items-center mt-2">
+                <span class="date-span left">{{blog.frontMatter.category}}</span>
+                <span class="date-span right ">{{getMonthName(blog.frontMatter.date.split('T')[0])}}</span>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </ng-template>
+    </ng-container>
+
+  </owl-carousel-o>
+
+
+  <div id="container" class="updateDialog all-dialog">
+    <div class="dialog-design">
+      <div class="header d-flex justify-content-between align-items-center">
+       <span class="h3 fw-bold" >Update Blog</span> <span class="fs-3 cursor-pointer" (click)="closeUpdate()"><i class="fa-solid fa-xmark"></i></span>
+
+       </div>
+        <div class="content">
+          <div class="body">
+            <form [formGroup]="blogForm" (submit)="changeBlog()">
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="form-elment w-50">
+                  <div class="flex-column">
+                    <label>title </label></div>
+                    <div class="inputForm">
+                      <i class="fa-regular fa-envelope"></i>
+                      <input type="text" class="form-control " placeholder="Enter Title of Blog" formControlName="title">
+                    </div>
+                </div>
+                <div class="form-elment w-50 ms-1">
+                  <div class="flex-column">
+                    <label>Category</label></div>
+                    <div class="inputForm">
+                      <i class="fa-solid fa-table-cells"></i>
+                      <input type="text" class="form-control" placeholder="Enter Title of Blog" formControlName="category">
+                    </div>
+                </div>
+              </div>
+
+             <div class="d-flex justify-content-between align-items-center">
+              <div class="form-elment">
+                <div class="flex-column">
+                  <label> Date </label></div>
+                  <div class="input-date position-relative">
+                    <i class="fa-regular fa-calendar-days"></i>
+                    <input placeholder="Enter Date" class="inpu" type="date" formControlName="date">
+                  </div>
+              </div>
+            <div class="form-elment">
+              <div class="doc d-flex">
+                <label for="images">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 3H12H8C6.34315 3 5 4.34315 5 6V18C5 19.6569 6.34315 21 8 21H11M13.5 3L19 8.625M13.5 3V7.625C13.5 8.17728 13.9477 8.625 14.5 8.625H19M19 8.625V11.8125" stroke="#fffffff" stroke-width="2"></path>
+                <path d="M17 15V18M17 21V18M17 18H14M17 18H20" stroke="#fffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                  </svg>
+                ADD image
+                </label>
+                <input type="file" (change)="getImageName($event)" class="d-none" id="images" formControlName="images">
+              </div>
+            </div>
+
+             </div>
+             <div class="form-elment">
+              <div class="flex-column">
+                <label>Summary</label></div>
+                <div class="inputForm">
+                  <i class="fa-solid fa-rectangle-list"></i>
+                  <input type="text" class="form-control "  placeholder="Enter Summary of Blog" formControlName="summary">
+                </div>
+            </div>
+            <form action="" formGroupName="author">
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="form-elment w-50">
+                  <div class="flex-column">
+                    <label>Author</label></div>
+                    <div class="inputForm">
+                      <i class="fa-brands fa-autoprefixer"></i>
+                      <input type="text" class="form-control " placeholder="Author Name" formControlName="name">
+                    </div>
+                </div>
+                <div class="form-elment w-50 ms-1">
+                  <div class="flex-column">
+                    <label>position</label></div>
+                    <div class="inputForm">
+                      <i class="fa-solid fa-user-plus"></i>
+                      <input type="text" class="form-control " placeholder="Author Position" formControlName="position">
+                    </div>
+                </div>
+              </div>
+            </form>
+              <div class="form-elment ms-1">
+                <div class="flex-column">
+                  <label>content</label></div>
+                  <div class="input-dte mt-1">
+                    <textarea cols="50" rows="10" class="" formControlName="content"></textarea>
+                  </div>
+              </div>
+
+            </form>
+           </div>
+           <div class="action d-flex justify-content-between">
+            <button type="submit" (click)="changeBlog()"> update</button>
+            <button class="cancel" (click)="closeUpdate()"> cancel</button>
+           </div>
+        </div>
+       </div>
+
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div id="container" class="deleteDialog all-dialog">
+  <div class="dialog-design del-dialog">
+    <div class="header d-flex justify-content-between align-items-center">
+      <span class="h3 fw-bold">Delete Blog</span> <span class="fs-3 cursor-pointer" (click)="closeDelete()"><i class="fa-solid fa-xmark"></i></span>
+     </div>
+     <div class="content">
+      <div class="body d-flex align-items-center">
+        <i class="fa-solid fa-triangle-exclamation fs-1 pe-3 pe-lg-4"></i> <p class="h3">Sure to Delete this Blog <span class=" text-capitalize shadow-lg p-2 rounded-3 text-black">{{blogActions.frontMatter.title}}</span> ?</p>
+       </div>
+      <div class="action d-flex justify-content-between">
+        <button (click)="deleteBlog()" > Delete</button>
+        <button class="cancel" (click)="closeDelete()"> cancel</button>
+       </div>
+     </div>
+  </div>
+</div>
+<div class="row g-3  bg-white shadow-sm pb-5 mt-4">
+  <div class="col-12 p-4 hover-title">
+    <h6 class="card-title my-header">All Blogs</h6>
+
+    </div>
+    <div class="col-md-6 col-xl-4" *ngFor="let blog of myBlogs" >
+      <div class="inner h-100 rounded-3">
+        <div class="card h-100">
+          <img [src]="blog.frontMatter.images" height="250" class="card-img-top">
+          <div class="card-body">
+            <h5 class="card-title text-truncate">{{blog.frontMatter.title}}</h5>
+            <p class="card-text h-40">{{blog.frontMatter.summary}}</p>
+            <div class="emergency-data pb-1 pt-1 px-1">
+              <div class="d-flex justify-content-center flex-column pb-2">
+                  <div class="d-flex align-items-center pb-2 ">
+                    <div class="emer-span">
+                      <div class="button-wrapper">
+                        <div class="text">Author : </div>
+                          <span class="icon">
+                            <i class="fa-solid fa-pen"></i>
+                          </span>
+                        </div>
+                    </div>
+                    <span class="ps-1" >{{blog.frontMatter.author.name}}</span>
+                  </div>
+                  <div class="d-flex align-items-center">
+                    <div class="emer-span">
+                      <div class="button-wrapper">
+                        <div class="text">Type : </div>
+                          <span class="icon">
+                            <i class="fa-brands fa-typo3"></i>
+                          </span>
+                        </div>
+                      </div>
+                      <span class=" fw-bolder ps-1">{{blog.frontMatter.category}}</span>
+                  </div>
+              </div>
+            </div>
+            <div class="d-flex justify-content-between align-items-center mb-3">
+              <button class=" delete btn-12" (click)="openDelete(blog)">
+                <span>Delete</span>
+              </button>
+              <button class="update btn-12" (click)="openUpdate(blog)">
+                <span>Update</span>
+              </button>
+            </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <app-note [data]="parentData" class="my-note position-fixed" *ngIf="this._note.toggelNote"></app-note>

@@ -1,0 +1,65 @@
+<section class="my-3">
+  <div class="container-fluid">
+      <div class="row justify-contr align-items-center">
+        <div class="col-lg-4">
+          <div class="inner mt-0 mt-lg-5 pt-0 pt-lg-4">
+            <form class="form" [formGroup]="loginForm" (submit)="handleForm()" >
+              <div class="form-elment">
+                <div class="flex-column">
+                  <label>Email </label></div>
+                  <div class="inputForm">
+                    <i class="fa-regular fa-envelope"></i>
+                    <input placeholder="Enter your Email" class="input" type="email" formControlName="email">
+                  </div>
+                  <div class="alert alert-danger " *ngIf="loginForm.get('email')?.touched && loginForm.get('email')?.errors">
+                    <div *ngIf="loginForm.get('email')?.getError('required')">
+                      <small>                     Email is required
+                      </small>
+                    </div>
+                    <div *ngIf="loginForm.get('email')?.getError('email')" >
+                      <small>                      Please in E-mail format
+                      </small>
+                    </div>
+                  </div>
+              </div>
+
+              <div class="form-elment">
+                <div class="flex-column">
+                  <label>Password </label></div>
+                  <div class="inputForm">
+                    <i class="fa-solid fa-lock"></i>
+                    <input placeholder="Enter your Password" class="input" type="password" formControlName="password">
+                  </div>
+                  <div class="alert alert-danger " *ngIf="loginForm.get('password')?.touched && loginForm.get('password')?.errors">
+                    <div *ngIf="loginForm.get('password')?.getError('required')">
+                      <small>                     Password is required
+                      </small>
+                    </div>
+                    <div *ngIf="loginForm.get('password')?.getError('pattern')" >
+                      <small>                     Password Accept any thing but at least 8 digits
+                      </small>
+                    </div>
+                  </div>
+              </div>
+
+              <div class="flex-row justify-content-center">
+                <span class="span">Forgot password?</span>
+              </div>
+              <button class="button-submit" (click)="handleForm()" type="submit">Sign In</button>
+              <p class="p">Don't have an account? <span class="span" routerLink="/auth/register">Sign Up</span>
+
+              </p></form>
+
+          </div>
+        </div>
+        <div class="col-lg-8">
+          <div class="inner d-flex flex-column  w-100 align-items-center justify-content-center">
+              <img src="assets/img/BG/undraw_medicine_b-1-ol.svg" class="w-100" alt="">
+         </div>
+        </div>
+      </div>
+  </div>
+</section>
+
+
+<app-note [data]="parentData" class="my-note position-fixed" *ngIf="this._note.toggelNote"></app-note>

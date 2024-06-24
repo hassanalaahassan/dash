@@ -1,0 +1,23 @@
+<section class="my-4">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12">
+        <div class="inner w-50 mx-auto shadow-sm">
+          <div class="cookie-card">
+            <span class="title">🍪 Varify your account</span>
+            <p class="description">In order to be able to log in, you must confirm your registration via the mail that was sent to your email <a role="button">Read cookies policies</a>. </p>
+            <div class="actions">
+                <button class="pref" routerLink="/register">
+                    Back to register
+                </button>
+                <button class="accept" routerLink="/auth/login" (click)="goToGmail()">
+                    Varify
+                </button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,250 @@
+<div class="d-flex justify-content-between align-items-center flex-wrap grid-margin">
+  <div>
+    <h4 class="mb-3 mb-md-0">Welcome To Admin Panal</h4>
+  </div>
+</div>
+
+<owl-carousel-o [options]="customOptions">
+
+  <ng-container *ngFor="let category of myCategory">
+    <ng-template carouselSlide>
+      <div class="position-relative cursor-pointer" [routerLink]="'/apps/'+category">
+        <img [src]="'assets/img/BG/' + category + '.jpg'" height="200" class="rounded-2 shadow-sm" >
+        <div class="date-span disapeer rounded-2 text-center position-absolute w-100 bg-primary text-white top-0 bg-opacity-75 cursor-pointer start-0 p-2">
+          <span class=" text-truncate fw-bold ">{{category}}</span>
+        </div>
+      </div>
+    </ng-template>
+  </ng-container>
+
+</owl-carousel-o>
+<div id="container" class="all-dialog">
+    <div class="dialog-design">
+      <div class="header d-flex justify-content-between align-items-center">
+        <span class="h3 fw-bold">Create Admin</span> <span class="fs-3 cursor-pointer" (click)="closeDialog()"><i class="fa-solid fa-xmark"></i></span>
+       </div>
+      <div class="content">
+        <div class="body">
+          <p class="h3">Are you sure to make <span class=" text-capitalize shadow-lg p-2 rounded-3">{{userWillAdmin.firstname}}</span> admin?</p>
+         </div>
+        <div class="action d-flex justify-content-between">
+          <button (click)="newAdmin()"> confirm</button>
+          <button class="cancel" (click)="closeDialog()"> cancel</button>
+         </div>
+      </div>
+    </div>
+  </div>
+<div class="row">
+  <div class="col-12 col-xl-12 stretch-card">
+    <div class="row flex-grow-1">
+      <div class="col-md-4 grid-margin stretch-card">
+        <div class="card">
+          <div class="card-body">
+            <div class="d-flex justify-content-between align-items-baseline">
+              <h6 class="card-title mb-2">New Users</h6>
+              <!-- <div ngbDropdown class="mb-2">
+                <button ngbDropdownToggle class="btn p-0 no-dropdown-toggle-icon" type="button" id="dropdownMenuButton">
+                  <i class="icon-lg text-muted pb-3px" data-feather="more-horizontal" appFeatherIcon></i>
+                </button>
+                <div ngbDropdownMenu aria-labelledby="dropdownMenuButton">
+                  <a ngbDropdownItem class="d-flex align-items-center" href="" (click)="false"><i data-feather="eye" appFeatherIcon class="icon-sm me-2"></i> <span class="">View</span></a>
+                  <a ngbDropdownItem class="d-flex align-items-center" href="" (click)="false"><i data-feather="edit-2" appFeatherIcon class="icon-sm me-2"></i> <span class="">Edit</span></a>
+                  <a ngbDropdownItem class="d-flex align-items-center" href="" (click)="false"><i data-feather="trash" appFeatherIcon class="icon-sm me-2"></i> <span class="">Delete</span></a>
+                  <a ngbDropdownItem class="d-flex align-items-center" href="" (click)="false"><i data-feather="printer" appFeatherIcon class="icon-sm me-2"></i> <span class="">Print</span></a>
+                  <a ngbDropdownItem class="d-flex align-items-center" href="" (click)="false"><i data-feather="download" appFeatherIcon class="icon-sm me-2"></i> <span class="">Download</span></a>
+                </div>
+              </div> -->
+            </div>
+            <div class="row">
+              <div class="col-6 col-md-12 col-xl-5">
+                <h3 class="mb-2">3,897</h3>
+                <div class="d-flex align-items-baseline">
+                  <p class="text-success">
+                    <span>+3.3%</span>
+                    <i data-feather="arrow-up" appFeatherIcon class="icon-sm mb-1"></i>
+                  </p>
+                </div>
+              </div>
+              <div class="col-6 col-md-12 col-xl-7">
+                <div class="mt-md-3 mt-xl-0">
+                  <apx-chart
+                    [series]="customersChartOptions.series"
+                    [chart]="customersChartOptions.chart"
+                    [colors]="customersChartOptions.colors"
+                    [xaxis]="customersChartOptions.xaxis"
+                    [stroke]="customersChartOptions.stroke"
+                    [markers]="customersChartOptions.markers"
+                  ></apx-chart>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 grid-margin stretch-card">
+        <div class="card">
+          <div class="card-body">
+            <div class="d-flex justify-content-between align-items-baseline">
+              <h6 class="card-title mb-2">latest donation </h6>
+              <!-- <div ngbDropdown class="mb-2">
+                <button ngbDropdownToggle class="btn p-0 no-dropdown-toggle-icon" type="button" id="dropdownMenuButton1">
+                  <i class="icon-lg text-muted pb-3px" data-feather="more-horizontal" appFeatherIcon></i>
+                </button>
+                <div ngbDropdownMenu aria-labelledby="dropdownMenuButton1">
+                  <a ngbDropdownItem class="d-flex align-items-center" href="" (click)="false"><i data-feather="eye" appFeatherIcon class="icon-sm me-2"></i> <span class="">View</span></a>
+                  <a ngbDropdownItem class="d-flex align-items-center" href="" (click)="false"><i data-feather="edit-2" appFeatherIcon class="icon-sm me-2"></i> <span class="">Edit</span></a>
+                  <a ngbDropdownItem class="d-flex align-items-center" href="" (click)="false"><i data-feather="trash" appFeatherIcon class="icon-sm me-2"></i> <span class="">Delete</span></a>
+                  <a ngbDropdownItem class="d-flex align-items-center" href="" (click)="false"><i data-feather="printer" appFeatherIcon class="icon-sm me-2"></i> <span class="">Print</span></a>
+                  <a ngbDropdownItem class="d-flex align-items-center" href="" (click)="false"><i data-feather="download" appFeatherIcon class="icon-sm me-2"></i> <span class="">Download</span></a>
+                </div>
+              </div> -->
+            </div>
+            <div class="row">
+              <div class="col-6 col-md-12 col-xl-5">
+                <h3 class="mb-2">35,084</h3>
+                <div class="d-flex align-items-baseline">
+                  <p class="text-danger">
+                    <span>-2.8%</span>
+                    <i data-feather="arrow-down" appFeatherIcon class="icon-sm mb-1"></i>
+                  </p>
+                </div>
+              </div>
+              <div class="col-6 col-md-12 col-xl-7">
+                <div class="mt-md-3 mt-xl-0">
+                  <apx-chart
+                    [series]="ordersChartOptions.series"
+                    [chart]="ordersChartOptions.chart"
+                    [colors]="ordersChartOptions.colors"
+                    [plotOptions]="ordersChartOptions.plotOptions"
+                    [xaxis]="ordersChartOptions.xaxis"
+                  ></apx-chart>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 grid-margin stretch-card">
+        <div class="card">
+          <div class="card-body">
+            <div class="d-flex justify-content-between align-items-baseline">
+              <h6 class="card-title mb-0">Growth</h6>
+              <!-- <div ngbDropdown class="mb-2">
+                <button ngbDropdownToggle class="btn p-0 no-dropdown-toggle-icon" type="button" id="dropdownMenuButton2">
+                  <i class="icon-lg text-muted pb-3px" data-feather="more-horizontal" appFeatherIcon></i>
+                </button>
+                <div ngbDropdownMenu aria-labelledby="dropdownMenuButton2">
+                  <a ngbDropdownItem class="d-flex align-items-center" href="" (click)="false"><i data-feather="eye" appFeatherIcon class="icon-sm me-2"></i> <span class="">View</span></a>
+                  <a ngbDropdownItem class="d-flex align-items-center" href="" (click)="false"><i data-feather="edit-2" appFeatherIcon class="icon-sm me-2"></i> <span class="">Edit</span></a>
+                  <a ngbDropdownItem class="d-flex align-items-center" href="" (click)="false"><i data-feather="trash" appFeatherIcon class="icon-sm me-2"></i> <span class="">Delete</span></a>
+                  <a ngbDropdownItem class="d-flex align-items-center" href="" (click)="false"><i data-feather="printer" appFeatherIcon class="icon-sm me-2"></i> <span class="">Print</span></a>
+                  <a ngbDropdownItem class="d-flex align-items-center" href="" (click)="false"><i data-feather="download" appFeatherIcon class="icon-sm me-2"></i> <span class="">Download</span></a>
+                </div>
+              </div> -->
+            </div>
+            <div class="row">
+              <div class="col-6 col-md-12 col-xl-5">
+                <h3 class="mb-2">89.87%</h3>
+                <div class="d-flex align-items-baseline">
+                  <p class="text-success">
+                    <span>+2.8%</span>
+                    <i data-feather="arrow-up" appFeatherIcon class="icon-sm mb-1"></i>
+                  </p>
+                </div>
+              </div>
+              <div class="col-6 col-md-12 col-xl-7">
+                <div class="mt-md-3 mt-xl-0">
+                  <apx-chart
+                    [series]="growthChartOptions.series"
+                    [chart]="growthChartOptions.chart"
+                    [colors]="growthChartOptions.colors"
+                    [xaxis]="growthChartOptions.xaxis"
+                    [stroke]="growthChartOptions.stroke"
+                    [markers]="growthChartOptions.markers"
+                  ></apx-chart>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> <!-- row -->
+
+<div class="row mb-4">
+  <div class="col-lg-5 col-xl-4 grid-margin grid-margin-xl-0 stretch-card ">
+    <div class="card">
+      <div class="card-body">
+        <div class="d-flex justify-content-between align-items-baseline mb-2">
+          <h6 class="card-title mb-0">Last 8 Tickets</h6>
+          <div ngbDropdown class="mb-2">
+            <button ngbDropdownToggle class="btn p-0 no-dropdown-toggle-icon" type="button" id="dropdownMenuButton6">
+              <i class="icon-lg text-muted pb-3px" data-feather="more-horizontal" appFeatherIcon></i>
+            </button>
+            <div ngbDropdownMenu aria-labelledby="dropdownMenuButton6">
+              <a ngbDropdownItem class="d-flex align-items-center" href="" (click)="false"><i data-feather="eye" appFeatherIcon class="icon-sm me-2"></i> <span class="">View</span></a>
+              <a ngbDropdownItem class="d-flex align-items-center" href="" (click)="false"><i data-feather="edit-2" appFeatherIcon class="icon-sm me-2"></i> <span class="">Edit</span></a>
+              <a ngbDropdownItem class="d-flex align-items-center" href="" (click)="false"><i data-feather="trash" appFeatherIcon class="icon-sm me-2"></i> <span class="">Delete</span></a>
+              <a ngbDropdownItem class="d-flex align-items-center" href="" (click)="false"><i data-feather="printer" appFeatherIcon class="icon-sm me-2"></i> <span class="">Print</span></a>
+              <a ngbDropdownItem class="d-flex align-items-center" href="" (click)="false"><i data-feather="download" appFeatherIcon class="icon-sm me-2"></i> <span class="">Download</span></a>
+            </div>
+          </div>
+        </div>
+        <div class="d-flex flex-column">
+          <a href="" (click)="false" class="d-flex align-items-center border-bottom pb-3 pt-1" *ngFor="let ticket of myTickets;let i = index">
+            <div class="me-3">
+              <img *ngIf="i%2==0" src="../../../../assets/img/BG/undraw_male_avatar_g98d.svg" class="rounded-circle wd-35" alt="user">
+              <img *ngIf="i%2!=0" src="../../../../assets/img/BG/undraw_female_avatar_efig.svg" class="rounded-circle wd-35" alt="user">
+            </div>
+            <div class="w-100">
+              <div class="d-flex justify-content-between">
+                <h6 class="text-body mb-2">{{ticket.ownerEmail}}</h6>
+                <p class="text-muted tx-12">{{getMonthName(ticket.donationDate.split('T')[0])}}</p>
+              </div>
+              <p class="text-muted tx-13">(Expiry Day : {{ticket.expiryDate.split('T')[0]}} )</p>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-7 col-xl-8 stretch-card">
+    <div class="card">
+      <div class="card-body">
+        <div class="d-flex justify-content-between align-items-baseline mb-2">
+          <h6 class="card-title mb-0">users</h6>
+        </div>
+        <div class="table-responsive">
+          <table class="table table-hover mb-0">
+            <thead>
+              <tr class=" text-capitalize">
+                <th class="pt-0">#</th>
+                <th class="pt-0">profile</th>
+                <th class="pt-0">user name</th>
+                <th class="pt-0">gender</th>
+                <th class="pt-0">authorities</th>
+                <th class="pt-0">blood Type</th>
+                <th class="pt-0">location</th>
+              </tr>
+            </thead>
+            <tbody class="text-capitalize">
+              <tr *ngFor="let user of myUsers; let i = index " class="cursor-pointer" (click)="openDialog(user)">
+                <td>{{i+1}}</td>
+                <td class="pt-2" *ngIf="user.gender=='male'"><img src="../../../../assets/img/BG/undraw_male_avatar_g98d.svg" class="rounded-circle wd-35" alt="user"></td>
+                <td class="pt-2" *ngIf="user.gender!='male'"><img src="../../../../assets/img/BG/undraw_female_avatar_efig.svg" class="rounded-circle wd-35" alt="user"></td>
+                <td>{{user.firstname}}</td>
+                <td>{{user.gender}}</td>
+                <td>{{user.authorities[1] ? 'admin' : 'user'}}</td>
+                <td>{{user.bloodType}}</td>
+                <td>{{user.country + ','+ user.city}}</td>
+              </tr>
+              </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> <!-- row -->
+<app-note [data]="parentData" class="my-note position-fixed" *ngIf="this._note.toggelNote"></app-note>
+

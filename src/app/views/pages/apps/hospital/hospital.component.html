@@ -1,0 +1,202 @@
+
+<div id="container" class="updateDialog all-dialog">
+  <div class="dialog-design">
+    <div class="header d-flex justify-content-between align-items-center">
+     <span class="h3 fw-bold" >Update Hospital</span> <span class="fs-3 cursor-pointer" (click)="closeUpdate()"><i class="fa-solid fa-xmark"></i></span>
+
+     </div>
+      <div class="content">
+        <div class="body">
+          <form [formGroup]="createHospital">
+            <div class="form-elment">
+              <div class="flex-column">
+                <label>title </label></div>
+                <div class="inputForm">
+                  <i class="fa-regular fa-envelope"></i>
+                  <input placeholder="Enter hospital title's" class="input" formControlName="title">
+                </div>
+
+            </div>
+              <div class="form-elment">
+                <div class="flex-column">
+                  <label> Date </label></div>
+                  <div class="input-date position-relative">
+                    <i class="fa-regular fa-calendar-days"></i>
+                    <input placeholder="Enter Date" class="inpu" type="date" formControlName="date">
+                  </div>
+            </div>
+            <div class="form-elment my-4">
+              <div class="flex-column">
+                <div class="doc d-flex">
+                  <label for="images">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 3H12H8C6.34315 3 5 4.34315 5 6V18C5 19.6569 6.34315 21 8 21H11M13.5 3L19 8.625M13.5 3V7.625C13.5 8.17728 13.9477 8.625 14.5 8.625H19M19 8.625V11.8125" stroke="#fffffff" stroke-width="2"></path>
+                  <path d="M17 15V18M17 21V18M17 18H14M17 18H20" stroke="#fffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                    </svg>
+                  ADD image
+                  </label>
+                  <input type="file" (change)="getFile($event)" class="d-none" id="images" formControlName="image2">
+                </div>
+            </div>
+            </div>
+            <div class="form-elment">
+              <div class="flex-column">
+                <label>Discription </label></div>
+                <div class="input-dte">
+                  <textarea id="" cols="50" rows="10" class=" border-1" formControlName="description"></textarea>
+                </div>
+            </div>
+
+
+          </form>
+         </div>
+         <div class="action d-flex justify-content-between">
+          <button type="submit" (click)="updateHospital()"> update</button>
+          <button class="cancel" (click)="closeUpdate()"> cancel</button>
+         </div>
+      </div>
+     </div>
+
+  </div>
+  <div class="h3 my-header mb-2">Review Hospital</div>
+  <owl-carousel-o [options]="customOptions" >
+
+    <ng-container *ngFor="let hospital of myHospital.slice(0,8)">
+      <ng-template carouselSlide>
+        <div class=" position-relative animate">
+          <img [src]="hospital.frontMatter.image2" [alt]="hospital.frontMatter.title" height="200" class="rounded-2 shadow-sm" [title]="hospital.frontMatter.title">
+          <div class="date-span disapeer rounded-2 text-center position-absolute w-100 bg-primary text-white top-0 bg-opacity-75 cursor-pointer start-0 p-2">
+            <span class=" text-truncate fw-bold ">{{hospital.frontMatter.title}}</span>
+          </div>
+          <div class="text-white my-card bg-black bg-opacity-75 top-0 bottom-0 end-0 start-0 position-absolute p-3 h-100 w-100 rounded-2">
+            <div class="h5 fw-bold text-truncate">{{hospital.frontMatter.title}}</div>
+            <div class="body mt-2 d-flex flex-column">
+              <p class=" truncate-three-lines">{{hospital.frontMatter.description}}</p>
+              <div class="d-flex justify-content-between align-items-center mt-2">
+                <span class="date-span left">{{hospital.frontMatter.draft==false ? 'Available':'Not ِvailable'}}</span>
+                <span class="date-span right ">{{getMonthName(hospital.frontMatter.date.split('T')[0])}}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </ng-template>
+    </ng-container>
+
+  </owl-carousel-o>
+
+
+
+
+<div id="container" class="addDialog all-dialog" >
+  <div class="dialog-design">
+    <div class="header d-flex justify-content-between align-items-center">
+     <span class="h3 fw-bold" >Create Hospital</span> <span class="fs-3 cursor-pointer" (click)="toggleAdd()"><i class="fa-solid fa-xmark"></i></span>
+
+     </div>
+    <div class="content">
+      <div class="body">
+        <form [formGroup]="createHospital">
+          <div class="form-elment">
+            <div class="flex-column">
+              <label>title </label></div>
+              <div class="inputForm">
+                <i class="fa-regular fa-envelope"></i>
+                <input placeholder="Enter hospital title's" class="input" formControlName="title">
+              </div>
+
+          </div>
+          <div class="input-container justify-content-between align-items-center">
+            <div class="form-elment">
+              <div class="flex-column">
+                <label> Date </label></div>
+                <div class="input-date position-relative">
+                  <i class="fa-regular fa-calendar-days"></i>
+                  <input placeholder="Enter Date" class="inpu" type="date" formControlName="date">
+                </div>
+            </div>
+            <div class="form-elment">
+              <div class="flex-column">
+                <div class="doc d-flex">
+                  <label for="images">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 3H12H8C6.34315 3 5 4.34315 5 6V18C5 19.6569 6.34315 21 8 21H11M13.5 3L19 8.625M13.5 3V7.625C13.5 8.17728 13.9477 8.625 14.5 8.625H19M19 8.625V11.8125" stroke="#fffffff" stroke-width="2"></path>
+                  <path d="M17 15V18M17 21V18M17 18H14M17 18H20" stroke="#fffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                    </svg>
+                  ADD image
+                  </label>
+                  <input type="file" (change)="getFile($event)" class="d-none" id="images" formControlName="image2">
+                </div>
+            </div>
+            </div>
+          </div>
+          <div class="form-elment">
+            <div class="flex-column">
+              <label>Discription </label></div>
+              <div class="input-dte">
+                <textarea id="" cols="50" rows="10" class=" border-1 " formControlName="description"></textarea>
+              </div>
+          </div>
+
+
+        </form>
+       </div>
+      <div class="action d-flex justify-content-between">
+        <button type="submit" (click)="newHospital()" > confirm</button>
+        <button class="cancel" (click)="toggleAdd()"> cancel</button>
+       </div>
+    </div>
+  </div>
+</div>
+<div id="container" class="deleteDialog all-dialog">
+  <div class="dialog-design">
+    <div class="header d-flex justify-content-between align-items-center">
+      <span class="h3 fw-bold">Delete Hospital</span> <span class="fs-3 cursor-pointer" (click)="closeDelete()"><i class="fa-solid fa-xmark"></i></span>
+     </div>
+    <div class="content">
+      <div class="body d-flex align-items-center">
+        <i class="fa-solid fa-triangle-exclamation fs-1 pe-3 pe-lg-4"></i> <p class="h3">Sure to Delete hospital of <span class=" text-capitalize shadow-lg p-2 rounded-3 text-black">{{this.hospitalChange.frontMatter.title}}</span> ?</p>
+       </div>
+      <div class="action d-flex justify-content-between">
+        <button (click)="delHospital()"> Delete</button>
+        <button class="cancel" (click)="closeDelete()"> cancel</button>
+       </div>
+    </div>
+  </div>
+</div>
+<div class="row g-3 bg-white shadow-sm pb-5 mt-2">
+  <div class="col-12 p-4 hover-title">
+    <h6 class="card-title my-header">Hospitals</h6>
+    <div class="head mt-3">
+      <!-- <button class="add " (click)="toggelAdd()">
+        Add
+    </button> -->
+    <button (click)="toggleAdd()" class="btn-12 add"><span>Add</span></button>
+
+
+    </div>
+
+    </div>
+    <div class="col-md-6 col-lg-4 shadow-sm my-cards" *ngFor="let hospital of myHospital">
+      <div class="inner h-100 rounded-3">
+        <div class="card h-100">
+          <div class="card-img">
+            <img [src]="hospital.frontMatter.image2" height="300" class="card-img-top" [alt]="hospital.frontMatter.title">
+          </div>
+          <div class="card-body px-3 ">
+            <h5 class="card-title">{{hospital.frontMatter.title}}</h5>
+            <p class="card-text">{{hospital.frontMatter.description.split(' ',30).join(' ')}}</p>
+            <div class="d-flex justify-content-between align-items-center">
+              <button class=" delete btn-12" (click)="openDelete(hospital)">
+                <span>Delete</span>
+              </button>
+              <button class="update btn-12" (click)="openUpdate(hospital)">
+                <span>Update</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <app-note [data]="parentData" class="my-note position-fixed" *ngIf="this._note.toggelNote"></app-note>

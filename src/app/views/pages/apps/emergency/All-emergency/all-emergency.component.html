@@ -1,0 +1,323 @@
+<div class="h3 my-header mb-2">Review Emergency</div>
+  <owl-carousel-o [options]="customOptions" >
+
+    <ng-container *ngFor="let emergency of myEmergency.slice(0,8)">
+      <ng-template carouselSlide>
+        <div class=" position-relative animate">
+          <img [src]="emergency.frontMatter.images" [alt]="emergency.frontMatter.title" height="200" class="rounded-2 shadow-sm" [title]="emergency.frontMatter.title">
+          <div class="date-span disapeer rounded-2 text-center position-absolute w-100 bg-primary text-white top-0 bg-opacity-75 cursor-pointer start-0 p-2">
+            <span class=" text-truncate fw-bold">{{emergency.frontMatter.title}}</span>
+          </div>
+          <div class="date-span disapeer left position-absolute w-auto text-white bottom-0 bg-opacity-75 cursor-pointer start-0 p-2" [ngClass]="emergency.frontMatter.level == 'High' ? 'bg-danger' : 'bg-primary'">
+            <span>{{emergency.frontMatter.level}}</span>
+          </div>
+          <div class="text-white my-card bg-black bg-opacity-75 top-0 bottom-0 end-0 start-0 position-absolute p-3 h-100 w-100">
+            <div class="h5 fw-bold text-truncate">{{emergency.frontMatter.title}}</div>
+            <div class="body mt-2 d-flex flex-column">
+              <p class=" truncate-three-lines">{{emergency.frontMatter.summary}}</p>
+              <div class="d-flex justify-content-between align-items-center mt-2">
+                <span class="date-span left">{{emergency.frontMatter.category}}</span>
+                <span class="date-span right ">{{getMonthName(emergency.frontMatter.date.split('T')[0])}}</span>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </ng-template>
+    </ng-container>
+
+  </owl-carousel-o>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="row g-3  bg-white shadow-sm pb-5 mt-2">
+  <div class="col-12 p-4 hover-title">
+    <h6 class="card-title my-header">All Emergency</h6>
+
+    </div>
+    <div class="col-md-4" *ngFor="let emer of myEmergency" >
+      <div class="inner h-100 rounded-3">
+        <div class="card h-100">
+          <img [src]="emer.frontMatter.images" height="300" class="card-img-top">
+          <div class="card-body">
+            <h5 class="card-title text-truncate">{{emer.frontMatter.title}}</h5>
+            <p class="card-text truncate-four-lines h-40">{{emer.frontMatter.summary}}</p>
+
+
+                <div class="emergency-data pb-2 pt-1 px-1">
+                  <div class="d-flex justify-content-between align-items-center pb-2">
+
+                    <!-- <div class="d-flex align-items-center">
+                      <div class="emer-span">
+                        <div class="button-wrapper">
+                          <div class="text">Date : </div>
+                            <span class="icon">
+                              <i class="fa-regular fa-calendar-days"></i>
+                            </span>
+                          </div>
+                      </div>
+                      <span class=" fw-bolder ps-1">{{emer.frontMatter.date.split('T')[0].split('-')[1] +'-'+ emer.frontMatter.date.split('T')[0].split('-')[2]  }}</span>
+                    </div> -->
+
+
+                      <div class="d-flex align-items-center">
+                        <div class="emer-span" [ngClass]="emer.frontMatter.level == 'High' ? 'bg-danger' : ''">
+                          <div class="button-wrapper">
+                            <div class="text">Priority : </div>
+                              <span class="icon">
+                                <i class="fa-solid fa-signal"></i>
+                              </span>
+                            </div>
+                        </div>
+                        <span class="ps-2" >{{emer.frontMatter.level}}</span>
+                      </div>
+
+
+
+                      <div class="d-flex align-items-center">
+                        <div class="emer-span">
+                          <div class="button-wrapper">
+                            <div class="text">Type : </div>
+                              <span class="icon">
+                                <i class="fa-brands fa-typo3"></i>
+                              </span>
+                            </div>
+                          </div>
+                          <span class=" fw-bolder ps-2">{{emer.frontMatter.category}}</span>
+                      </div>
+                  </div>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <div class="d-flex align-items-center">
+                      <div class="emer-span">
+                        <div class="button-wrapper">
+                          <div class="text">Location : </div>
+                            <span class="icon">
+                              <i class="fa-solid fa-location-dot"></i>
+                            </span>
+                          </div>
+                        </div>
+                        <span class="ps-2">{{emer.frontMatter.location}},{{emer.frontMatter.site}}</span>
+                    </div>
+
+                  </div>
+                </div>
+                <div class="d-flex justify-content-between align-items-center">
+                  <button class=" delete btn-12" (click)="openDelete(emer)">
+                    <span>Delete</span>
+                  </button>
+                  <button class="update btn-12" (click)="openUpdate(emer)">
+                    <span>Update</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+  </div>
+</div>
+
+
+      <div id="container" class="deleteDialog all-dialog">
+        <div class="dialog">
+          <div class="header d-flex justify-content-between align-items-center">
+            <span class="h3 fw-bold">Delete Emergency</span> <span class="fs-3 cursor-pointer" (click)="closeDelete()"><i class="fa-solid fa-xmark"></i></span>
+           </div>
+           <div class="content">
+            <div class="body d-flex align-items-center">
+              <i class="fa-solid fa-triangle-exclamation fs-1 pe-3 pe-lg-4"></i> <p class="h3">Sure to Delete this Emergency <span class=" text-capitalize shadow-lg p-2 rounded-3 text-black">{{emergencyActions.frontMatter.title}}</span> ?</p>
+             </div>
+            <div class="action d-flex justify-content-between">
+              <button (click)="deleteEmergency()"> Delete</button>
+              <button class="cancel" (click)="closeDelete()"> cancel</button>
+             </div>
+           </div>
+        </div>
+      </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      <div id="container" class="updateDialog all-dialog">
+        <div class="dialog-design">
+          <div class="header d-flex justify-content-between align-items-center">
+           <span class="h3 fw-bold" >Update Emergency</span> <span class="fs-3 cursor-pointer" (click)="closeUpdate()"><i class="fa-solid fa-xmark"></i></span>
+
+           </div>
+            <div class="content">
+              <div class="body">
+                <form [formGroup]="emergForm">
+                  <div class="form-elment">
+                    <div class="flex-column">
+                      <label>title </label></div>
+                      <div class="inputForm">
+                        <i class="fa-regular fa-envelope me-1"></i>
+                        <input type="text" class="form-control " placeholder="Enter Title of Emergency" formControlName="title">
+                      </div>
+                  </div>
+                  <div class="form-elment">
+                    <div class="flex-column">
+                      <label>location </label></div>
+                      <div class="inputForm">
+                        <i class="fa-solid fa-location-dot me-1"></i>                        <!-- <label class="form-label">Location</label> -->
+                        <input type="text" class="form-control " placeholder="Enter location of emergency" formControlName="location">
+                      </div>
+                  </div>
+                  <div class="form-elment">
+                    <div class="flex-column">
+                      <label for="category">Choose Governorate</label>
+                   <select id="category" class=" form-control mb-3 mt-2 border-1 border-primary cursor-pointer"  formControlName="site">
+                    <option value="New Valley">New Valley</option>
+                    <option value="Matruh">Matruh</option>
+                    <option value="Red Sea">Red Sea</option>
+                    <option value="Giza">Giza</option>
+                    <option value="South Sinai">South Sinai</option>
+                    <option value="North Sinai">North Sinai</option>
+                    <option value="Suez">Suez</option>
+                    <option value="Beheira">Beheira</option>
+                    <option value="Helwan">Helwan</option>
+                    <option value="Sharqia">Sharqia</option>
+                    <option value="Alexandria">Alexandria</option>
+                    <option value="Minya">Minya</option>
+                    <option value="Gharbia">Gharbia</option>
+                    <option value="Faiyum">Faiyum</option>
+                    <option value="Qena">Qena</option>
+                    <option value="Asyut">Asyut</option>
+                    <option value="Ismailia">Ismailia</option>
+                    <option value="Beni Suef">Beni Suef</option>
+                    <option value="Qalyubia">Qalyubia</option>
+                    <option value="Damietta">Damietta</option>
+                    <option value="Port Said">Port Said</option>
+                    <option value="6th of October">6th of October</option>
+                   </select>
+                  </div>
+                  </div>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <div class="form-elment">
+                      <div class="flex-column">
+                        <label for="">Choose Level</label>
+                        <select id="level" class=" form-control"  formControlName="level">
+                         <option value="Low">Low</option>
+                         <option value="Mid">Mid</option>
+                         <option value="High">High</option>
+                        </select>
+                      </div>
+                  </div>
+                  <div class="form-elment">
+                    <div class="flex-column">
+                      <label for="category">Choose Type</label>
+                         <select id="category" class=" form-control mb-3 mt-2 "  formControlName="category">
+                          <option value="A-">A-</option>
+                          <option value="A+">A+</option>
+                          <option value="B-">B-</option>
+                          <option value="B+">B+</option>
+                          <option value="O-">O-</option>
+                          <option value="O+">O+</option>
+                         </select>
+                    </div>
+                </div>
+                  </div>
+                  <div class="form-elment">
+                    <div class="flex-column">
+                      <label> Date </label></div>
+                      <div class="input-date position-relative">
+                        <i class="fa-regular fa-calendar-days"></i>
+                        <input placeholder="Enter Date" class="inpu" type="date" formControlName="date">
+                      </div>
+                </div>
+
+
+                  <div class="form-elment ms-1">
+                    <div class="flex-column">
+                      <label>Summary</label></div>
+                      <div class="mt-1">
+                        <textarea id="" cols="50" rows="10" class="" formControlName="summary"></textarea>
+                      </div>
+                  </div>
+
+
+                </form>
+               </div>
+               <div class="action d-flex justify-content-between">
+                <button type="submit" (click)="updateEmergency()"> update</button>
+                <button class="cancel" (click)="closeUpdate()"> cancel</button>
+               </div>
+            </div>
+           </div>
+
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      <app-note [data]="parentData" class="my-note position-fixed" *ngIf="this._note.toggelNote"></app-note>

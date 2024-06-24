@@ -1,0 +1,169 @@
+<div id="container" class="updateDialog all-dialog" >
+  <div class="dialog-design">
+    <div class="header d-flex justify-content-between align-items-center">
+     <span class="h3 fw-bold" >Update Blood Bag</span> <span class="fs-3 cursor-pointer" (click)="closeUpdate()"><i class="fa-solid fa-xmark"></i></span>
+
+     </div>
+    <div class="content">
+      <div class="body">
+        <form  [formGroup]="bagForm">
+          <div class="form-elment">
+            <div class="flex-column">
+              <label>Donor Email </label></div>
+              <div class="inputForm">
+                <i class="fa-regular fa-envelope"></i>
+                <input placeholder="Enter your Email" class="input" formControlName="donorEmail">
+              </div>
+          </div>
+          <div class="form-elment">
+            <div class="flex-column">
+              <label>hospital ID </label></div>
+              <select  formControlName="hospitalId" class="w-50 p-2 rounded-2 cursor-pointer">
+                <option [value]="hospital.id" *ngFor="let hospital of myHospital" >{{hospital.frontMatter.title}}</option>
+              </select>
+          </div>
+          <div class="form-elment">
+            <div class="flex-column">
+              <label>Choose Blood Type</label></div>
+              <div class="inputFor">
+                <select class="w-50 p-2 rounded-2 cursor-pointer" formControlName="bloodType">
+                  <option value="O-" selected>O-</option>
+                  <option value="O-">O+</option>
+                  <option value="A-">A-</option>
+                  <option value="A+">A+</option>
+                  <option value="B-">B-</option>
+                  <option value="B+">B+</option>
+                </select>
+              </div>
+          </div>
+        </form>
+       </div>
+      <div class="action d-flex justify-content-between">
+        <button type="submit" (click)="editBag()" > Update</button>
+        <button class="cancel" (click)="closeUpdate()"> cancel</button>
+       </div>
+    </div>
+  </div>
+</div>
+<div id="container" class="addDialog all-dialog">
+  <div class="dialog-design">
+    <div class="header d-flex justify-content-between align-items-center">
+     <span class="h3 fw-bold" >Create Blood Bag</span> <span class="fs-3 cursor-pointer" (click)="addDialog()"><i class="fa-solid fa-xmark"></i></span>
+
+     </div>
+    <div class="content">
+      <div class="body">
+        <form  [formGroup]="bagForm">
+          <div class="form-elment">
+            <div class="flex-column">
+              <label>Donor Email </label></div>
+              <div class="inputForm">
+                <i class="fa-regular fa-envelope"></i>
+                <input placeholder="Enter your Email" class="input" formControlName="donorEmail">
+              </div>
+          </div>
+          <div class="form-elment">
+            <div class="flex-column">
+              <label>hospital ID </label></div>
+              <select  formControlName="hospitalId" class="w-50 p-2 rounded-2 cursor-pointer">
+                <option [value]="hospital.id" *ngFor="let hospital of myHospital" >{{hospital.frontMatter.title}}</option>
+              </select>
+          </div>
+          <div class="form-elment">
+            <div class="flex-column">
+              <label>Choose Blood Type</label></div>
+              <div class="inputFor">
+                <select class="w-50 p-2 rounded-2 cursor-pointer" formControlName="bloodType">
+                  <option value="O-">O-</option>
+                  <option value="O+">O+</option>
+                  <option value="A-">A-</option>
+                  <option value="A+">A+</option>
+                  <option value="B-">B-</option>
+                  <option value="B+">B+</option>
+                </select>
+              </div>
+          </div>
+        </form>
+       </div>
+      <div class="action d-flex justify-content-between">
+        <button type="submit" (click)="newBag()" > confirm</button>
+        <button class="cancel" (click)="addDialog()"> cancel</button>
+       </div>
+    </div>
+  </div>
+</div>
+<div id="container" class="deleteDialog all-dialog">
+  <div class="dialog-design">
+    <div class="header d-flex justify-content-between align-items-center">
+      <span class="h3 fw-bold">Delete Bag</span> <span class="fs-3 cursor-pointer" (click)="closeDelete()"><i class="fa-solid fa-xmark"></i></span>
+     </div>
+    <div class="content">
+      <div class="body d-flex align-items-center">
+        <i class="fa-solid fa-triangle-exclamation fs-1 pe-3 pe-lg-4"></i>  <p class="h3">Sure to Delete <span class=" text-capitalize text-black shadow-lg p-2 rounded-3">{{findHospitalTitle(delBag.hospitalId)}}</span> blood bag's?</p>
+       </div>
+      <div class="action d-flex justify-content-between">
+        <button (click)="deleteBag()"> Delete</button>
+        <button class="cancel" (click)="closeDelete()"> cancel</button>
+       </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-12 stretch-card">
+    <div class="card hover-title">
+      <div class="card-body">
+        <h6 class="card-title my-header">Blood Bags</h6>
+        <div class="table-responsive">
+          <div class="head">
+            <button class="add btn-12 my-0" (click)="addDialog()">
+              <span>Add</span>
+          </button>
+          </div>
+          <table id="dataTableExample" class="table">
+            <thead>
+              <tr class=" text-capitalize">
+                <th>#</th>
+                <th>owner Email</th>
+                <th>Blood Type</th>
+                <th>hospital Title</th>
+                <th>donation Date</th>
+                <th>expiry Date</th>
+
+                <th class="text-center">actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let bag of bags ; let i = index">
+                <td>{{i+1}}</td>
+                <td>{{bag.donorEmail}}</td>
+                <td>{{bag.bloodType}}</td>
+                <td>{{findHospitalTitle(bag.hospitalId)}}</td>
+                <td>{{bag.donationDate}}</td>
+                <td>{{bag.expirationDate}}</td>
+                <td><div class="head d-flex justify-content-between align-items-baseline">
+                <button class="my-0 delete btn-12" (click)="openDelete(bag)">
+                  <span>Delete</span>
+                </button>
+                <button class="update my-0 btn-12" (click)="openUpdate(bag)" >
+                 <span>Update</span>
+                </button>
+                </div></td>
+              </tr>
+            </tbody>
+            <tfoot>
+              <tr>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<app-note [data]="parentData" class="my-note position-fixed" *ngIf="this._note.toggelNote"></app-note>

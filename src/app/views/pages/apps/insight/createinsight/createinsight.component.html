@@ -1,0 +1,62 @@
+<div class="row">
+  <div class="col-md-12 stretch-card">
+    <div class="card hover-title">
+      <div class="card-body">
+        <h6 class="card-title my-header">New Insight</h6>
+          <form [formGroup]="insightForm" (submit)="handleForm()">
+            <div class="row">
+              <div class="col-md-6">
+                <div class="mb-3">
+                  <label class="form-label">Title</label>
+                  <input type="text" class="form-control border-1 border-primary" placeholder="Enter Title of Insight" formControlName="title">
+                </div>
+              </div><!-- Col -->
+              <div class="col-md-6">
+                <div class="mb-3">
+                  <label for="category" class="form-label">Category</label>
+                  <input type="text" class="form-control border-1 border-primary" placeholder="Enter Title of Insight" formControlName="category">
+
+                </div>
+              </div><!-- Col -->
+
+            </div><!-- Row -->
+            <div class="row">
+              <div class="col-md-3 d-flex align-items-center">
+                <div class="doc d-flex">
+                  <label for="images">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 3H12H8C6.34315 3 5 4.34315 5 6V18C5 19.6569 6.34315 21 8 21H11M13.5 3L19 8.625M13.5 3V7.625C13.5 8.17728 13.9477 8.625 14.5 8.625H19M19 8.625V11.8125" stroke="#fffffff" stroke-width="2"></path>
+                  <path d="M17 15V18M17 21V18M17 18H14M17 18H20" stroke="#fffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                    </svg>
+                  ADD image
+                  </label>
+                  <input type="file" (change)="getImageName($event)" class="d-none" id="images" formControlName="images">
+                </div>
+                <span class=" bg-black text-white p-1 rounded-1 ms-2 shadow-md" *ngIf="imageName">{{imageName}}</span>
+              </div>
+              <div class="col-md-2 position-relative">
+                <div class="mb-3">
+                  <label class="form-label my-2 my-md-0">Date</label>
+                  <input type="date" class="form-control border-1 border-primary" formControlName="date">
+                </div>
+              </div><!-- Col -->
+              <div class="col-md-7">
+                <label for="">Summary</label>
+                <input type="text" class="form-control border-1 border-primary" placeholder="Summary of Insight" formControlName="summary">
+              </div><!-- col -->
+
+
+            </div><!-- Row -->
+            <div class="container my-2">
+              <div class="row">
+                <label for="content" class="form-label">Content</label>
+                <textarea name="" cols="15" rows="10" id="content" class=" border-1 border-primary rounded-2" formControlName="content"></textarea>
+              </div><!-- Row -->
+            </div>
+          </form>
+          <button type="submit" (click)="handleForm()" class="btn btn-dark submit">New Insight</button>
+      </div>
+    </div>
+  </div>
+</div>
+<app-note [data]="parentData" class="my-note position-fixed" *ngIf="this._note.toggelNote"></app-note>

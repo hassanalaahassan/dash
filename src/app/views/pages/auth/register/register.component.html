@@ -1,0 +1,187 @@
+<section class="">
+  <div class="container-fluid">
+      <div class="row justify-contr align-items-center">
+        <div class="col-lg-4">
+          <div class="inner">
+            <form class="form" [formGroup]="registerForm"  (submit)="handleForm()" >
+              <div class="form-elment">
+                <div class="flex-column">
+                  <label>First Name </label>
+                </div>
+                  <div class="inputForm">
+                    <i class="fa-solid fa-person"></i>
+                    <input placeholder="First name" class=" input is-invalid" type="text" formControlName="firstName" >
+                  </div>
+                  <div class="alert alert-danger " *ngIf="registerForm.get('firstName')?.touched && registerForm.get('firstName')?.errors">
+                    <div *ngIf="registerForm.get('firstName')?.getError('required')">
+                      <small>                      First Name is required
+                      </small>
+                    </div>
+                    <div *ngIf="registerForm.get('firstName')?.getError('pattern')" >
+                      <small>                      First Name Only accept character and at least 2 letter
+                      </small>
+                    </div>
+                  </div>
+              </div>
+              <div class="form-elment">
+                <div class="flex-column">
+                  <label>Last Name </label>
+                </div>
+                  <div class="inputForm">
+                    <i class="fa-solid fa-person-rays"></i>
+                    <input placeholder="Last name" class="input" type="text" formControlName="lastName">
+                  </div>
+                  <div class="alert alert-danger " *ngIf="registerForm.get('lastName')?.touched && registerForm.get('lastName')?.errors">
+                    <div *ngIf="registerForm.get('lastName')?.getError('required')">
+                      <small>                      Last Name is required
+                      </small>
+                    </div>
+                    <div *ngIf="registerForm.get('lastName')?.getError('pattern')" >
+                      <small>                      Last Name Only accept character and at least 2 letter
+                      </small>
+                    </div>
+                  </div>
+              </div>
+              <div class="form-elment">
+                <div class="flex-column">
+                  <label>User Name</label>
+                </div>
+                  <div class="inputForm">
+                    <i class="fa-solid fa-user"></i>
+                    <input placeholder="User name " class="input" type="text" formControlName="username">
+                  </div>
+                  <div class="alert alert-danger " *ngIf="registerForm.get('username')?.touched && registerForm.get('username')?.errors">
+                    <div *ngIf="registerForm.get('username')?.getError('required')">
+                      <small>                      User Name is required
+                      </small>
+                    </div>
+                    <div *ngIf="registerForm.get('username')?.getError('pattern')" >
+                      <small>                      User Name Only accept character and at least 4 letter with out space
+                      </small>
+                    </div>
+                  </div>
+              </div>
+
+              <div class="form-elment">
+                <div class="flex-column">
+                  <label>Email </label>
+                </div>
+                  <div class="inputForm">
+                    <i class="fa-solid fa-envelope"></i>
+                    <input placeholder="Enter your Email" class="input" type="email" formControlName="email">
+                  </div>
+                  <div class="alert alert-danger " *ngIf="registerForm.get('email')?.touched && registerForm.get('email')?.errors">
+                    <div *ngIf="registerForm.get('email')?.getError('required')">
+                      <small>                     Email is required
+                      </small>
+                    </div>
+                    <div *ngIf="registerForm.get('email')?.getError('email')" >
+                      <small>                      Please in E-mail format
+                      </small>
+                    </div>
+                  </div>
+              </div>
+              <div class="form-elment">
+                <div class="flex-column">
+                  <label>Password </label>
+                </div>
+                  <div class="inputForm">
+                    <i class="fa-solid fa-lock"></i>
+                    <input placeholder="Enter your Password" class="input" type="password" formControlName="password">
+                  </div>
+                  <div class="alert alert-danger " *ngIf="registerForm.get('password')?.touched && registerForm.get('password')?.errors">
+                    <div *ngIf="registerForm.get('password')?.getError('required')">
+                      <small>                     Password is required
+                      </small>
+                    </div>
+                    <div *ngIf="registerForm.get('password')?.getError('pattern')" >
+                      <small>                     Password Accept any thing but at least 8 digits
+                      </small>
+                    </div>
+                  </div>
+
+              </div>
+
+
+              <div class="form-elment">
+                <div class="flex-column">
+                  <label>Phone Number</label>
+                </div>
+                  <div class="inputForm">
+                    <i class="fa-solid fa-mobile"></i>
+                    <input placeholder="01xxxxxxxxx" class="input" type="tel" formControlName="phone">
+                  </div>
+                  <div class="alert alert-danger " *ngIf="registerForm.get('phone')?.touched && registerForm.get('phone')?.errors">
+                    <div *ngIf="registerForm.get('phone')?.getError('required')">
+                      <small>                     Phone Number is required
+                      </small>
+                    </div>
+                    <div *ngIf="registerForm.get('phone')?.getError('pattern')" >
+                      <small>                     Phone Number Only accept Egyption number
+                      </small>
+                    </div>
+                  </div>
+
+              </div>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="form-elment w-100">
+                  <div class="flex-column">
+                    <label>Gender</label>
+                  </div>
+                    <div class="">
+                      <select class="p-2 rounded-2 cursor-pointer w-50" formControlName="gender">
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                      </select>
+                   </div>
+                    <div class="notifications-container my-1 mx-auto" *ngIf="registerForm.get('username')?.touched && registerForm.get('username')?.errors">
+                      <div class="error-alert">
+                        <div class="flex">
+                          <div class="error-prompt-container">
+                            <p class="error-prompt-heading">User Name must be
+                            </p>
+                            <div class="error-prompt-wrap">
+                              <ul class="error-prompt-list" role="list">
+                                <li *ngIf="registerForm.get('gender')?.getError('required')" >is required </li>
+                              </ul>
+                          </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                </div>
+                <div class="form-elment w-100">
+                  <div class="flex-column">
+                    <label>Choose Blood Type</label></div>
+                    <div class="inputFor">
+                      <select class="w-50 p-2 rounded-2 cursor-pointer" formControlName="bloodType">
+                        <option value="O-">O-</option>
+                        <option value="O+">O+</option>
+                        <option value="A-">A-</option>
+                        <option value="A+">A+</option>
+                        <option value="B-">B-</option>
+                        <option value="B+">B+</option>
+                      </select>
+                    </div>
+                </div>
+              </div>
+
+              <button class="button-submit" type="submit" >Register</button>
+              <p class="p">Do you already have an account? <span class="span" routerLink="/auth/login">Sign In</span>
+
+              </p>
+            </form>
+          </div>
+        </div>
+        <div class="col-lg-8 align-self-baseline">
+          <div class="inner d-flex flex-column p-2 w-100 align-items-center justify-content-center">
+             <img src="assets/img/BG/undraw_medicine_b-1-ol.svg" class="w-100" alt="">
+         </div>
+        </div>
+      </div>
+  </div>
+</section>
+
+<app-note [data]="parentData" class="my-note position-fixed" *ngIf="this._note.toggelNote"></app-note>
+
+

@@ -1,0 +1,21 @@
+.note{
+  max-width: 320px;
+  min-width: 320px;
+  height: fit-content;
+  padding: 10px;
+  border-radius: 10px;
+
+  .head{
+    letter-spacing: 1px;
+  }
+}
+.note-error{
+  background: #cb1717;
+  border-left: 10px #d90a0a  solid;
+  color: white;
+}
+.note-succsses{
+  background: #17cb44;
+  border-left: 10px #0ad90a  solid;
+  color: white;
+}

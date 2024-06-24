@@ -1,0 +1,191 @@
+
+<div id="container" class="updateDialog all-dialog">
+  <div class="dialog-design">
+    <div class="header d-flex justify-content-between align-items-center">
+     <span class="h3 fw-bold" >Update Ticket</span> <span class="fs-3 cursor-pointer" (click)="closeUpdate()"><i class="fa-solid fa-xmark"></i></span>
+
+     </div>
+    <div class="content">
+      <div class="body">
+        <form [formGroup]="createTicket">
+          <div class="form-elment">
+            <div class="flex-column">
+              <label>Email </label></div>
+              <div class="inputForm">
+                <i class="fa-regular fa-envelope"></i>
+                <input placeholder="Enter your Email" class="input" formControlName="ownerEmail">
+              </div>
+          </div>
+          <div class="form-elment">
+            <div class="flex-column">
+              <label>hospital ID </label></div>
+              <select  formControlName="hospitalID" class="w-50 p-2 border-1 rounded-2 cursor-pointer">
+                <option [value]="hospital.id" *ngFor="let hospital of myHospital" >{{hospital.frontMatter.title}}</option>
+              </select>
+          </div>
+          <div class="form-elment">
+            <div class="flex-column">
+              <label>Donation Date </label></div>
+              <div class="input-date position-relative">
+                <i class="fa-regular fa-calendar-days"></i>
+                <input  class="inpu" type="date" formControlName="donationDate">
+              </div>
+          </div>
+          <div class="form-elment">
+            <div class="flex-column">
+              <label>transfer Date </label></div>
+              <div class="input-date position-relative">
+                <i class="fa-solid fa-right-left"></i>
+                <input placeholder="Enter Transfer Date" class="inpu" type="date" formControlName="transferDate">
+              </div>
+
+          </div>
+          <div class="form-elment">
+            <div class="flex-column">
+              <label>Expiry Date </label></div>
+              <div class="input-date position-relative">
+                <i class="fa-regular fa-calendar-check"></i>
+                <input placeholder="Enter Expiry Date" class="inpu" type="date" formControlName="expiryDate">
+              </div>
+          </div>
+        </form>
+       </div>
+      <div class="action d-flex justify-content-between">
+        <button type="submit" (click)="updateTicket()"> update</button>
+        <button class="cancel" (click)="closeUpdate()"> cancel</button>
+       </div>
+    </div>
+  </div>
+</div>
+<div id="container" class="addDialog all-dialog" >
+  <div class="dialog-design">
+    <div class="header d-flex justify-content-between align-items-center">
+     <span class="h3 fw-bold" >Create Ticket</span> <span class="fs-3 cursor-pointer" (click)="closeAdd()"><i class="fa-solid fa-xmark"></i></span>
+     </div>
+    <div class="content">
+      <div class="body">
+        <form [formGroup]="createTicket">
+          <div class="form-elment">
+            <div class="flex-column">
+              <label>Email </label></div>
+              <div class="inputForm">
+                <i class="fa-regular fa-envelope"></i>
+                <input placeholder="Enter your Email" class="input" formControlName="ownerEmail">
+              </div>
+          </div>
+          <div class="form-elment">
+            <div class="flex-column">
+              <label>hospital ID </label></div>
+              <select  formControlName="hospitalID" class="w-50 p-2 border-1 rounded-2 cursor-pointer">
+                <option [value]="hospital.id" *ngFor="let hospital of myHospital" >{{hospital.frontMatter.title}}</option>
+              </select>
+          </div>
+          <div class="form-elment">
+            <div class="flex-column">
+              <label>Donation Date </label></div>
+              <div class="input-date position-relative">
+                <i class="fa-regular fa-calendar-days"></i>
+                <input placeholder="Enter Donation Date" class="inpu" type="date" formControlName="donationDate">
+              </div>
+          </div>
+          <div class="form-elment">
+            <div class="flex-column">
+              <label>transfer Date </label></div>
+              <div class="input-date position-relative">
+                <i class="fa-solid fa-right-left"></i>
+                <input placeholder="Enter Transfer Date" class="inpu" type="date" formControlName="transferDate">
+              </div>
+
+          </div>
+          <div class="form-elment">
+            <div class="flex-column">
+              <label>Expiry Date </label></div>
+              <div class="input-date position-relative">
+                <i class="fa-regular fa-calendar-check"></i>
+                <input placeholder="Enter Expiry Date" class="inpu" type="date" formControlName="expiryDate">
+              </div>
+          </div>
+
+        </form>
+       </div>
+      <div class="action d-flex justify-content-between">
+        <button type="submit" (click)="newTicket()"> confirm</button>
+        <button class="cancel" (click)="closeAdd()"> cancel</button>
+       </div>
+    </div>
+  </div>
+</div>
+<div id="container" class="deleteDialog all-dialog">
+  <div class="dialog">
+    <div class="header d-flex justify-content-between align-items-center">
+      <span class="h3 fw-bold">Delete Ticket</span> <span class="fs-3 cursor-pointer" (click)="closeDelete()"><i class="fa-solid fa-xmark"></i></span>
+     </div>
+    <div class="content">
+      <div class="body d-flex align-items-center">
+        <i class="fa-solid fa-triangle-exclamation fs-1 pe-3 pe-lg-4"></i> <p class="h3 text-muted">Sure to Delete <span class=" text-capitalize shadow-lg p-2 rounded-3 text-black">{{ticketWillDelete.ownerEmail}}</span> ticket's?</p>
+       </div>
+      <div class="action d-flex justify-content-between">
+        <button (click)="delTicket()"> Delete</button>
+        <button class="cancel" (click)="closeDelete()"> cancel</button>
+       </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-12 stretch-card">
+    <div class="card hover-title">
+      <div class="card-body">
+        <h6 class="card-title my-header">Tickets</h6>
+        <div class="table-responsive">
+          <div class="head">
+            <button class="add btn-12" (click)="openAdd()">
+              <span>Add</span>
+          </button>
+          </div>
+          <table id="dataTableExample" class="table">
+            <thead>
+              <tr class=" text-capitalize">
+                <th>#</th>
+                <th>owner Email</th>
+                <th>hospital Title</th>
+                <th>donation Date</th>
+                <th>expiry Date</th>
+                <th>transfer Date</th>
+                <th class="text-center">actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let ticket of tickets ; let i = index">
+                <td>{{i+1}}</td>
+                <td>{{ticket.ownerEmail}}</td>
+                <td>{{findHospitalTitle(ticket.hospitalID)}}</td>
+                <td>{{ticket.donationDate.split('T')[0]}}</td>
+                <td>{{ticket.expiryDate.split('T')[0]}}</td>
+                <td>{{ticket.transferDate.split('T')[0]}}</td>
+                <td><div class="head d-flex justify-content-between align-items-baseline">
+                <button class="my-0 delete btn-12" (click)="openDelete(ticket)">
+                  <span>Delete</span>
+                </button>
+                <button class="update my-0 btn-12" (click)="openUpdate(ticket)">
+                 <span>Update</span>
+                </button>
+                </div></td>
+              </tr>
+            </tbody>
+            <tfoot>
+              <tr>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<app-note [data]="parentData" class="my-note position-fixed" *ngIf="this._note.toggelNote"></app-note>

@@ -1,0 +1,69 @@
+
+<div id="container" class="all-dialog">
+  <div class="dialog-design">
+    <div class="header d-flex justify-content-between align-items-center">
+      <span class="h3 fw-bold">Create Admin</span> <span class="fs-3 cursor-pointer" (click)="closeDialog()"><i class="fa-solid fa-xmark"></i></span>
+     </div>
+    <div class="content">
+      <div class="body">
+        <p class="h3">Are you sure to make <span class=" text-capitalize shadow-lg p-2 rounded-3">{{userWillAdmin.firstname}}</span> admin?</p>
+       </div>
+      <div class="action d-flex justify-content-between">
+        <button (click)="newAdmin()"> confirm</button>
+        <button class="cancel" (click)="closeDialog()"> cancel</button>
+       </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-12 stretch-card">
+    <div class="card hover-title">
+      <div class="card-body">
+        <h6 class="card-title my-header">All Users</h6>
+        <div class="table-responsive">
+          <!-- <div class="head">
+            <button class="add my-0">
+              Add
+          </button>
+          </div> -->
+          <table id="dataTableExample" class="table">
+            <thead>
+              <tr class=" text-capitalize">
+                <th class="pt-0">#</th>
+                <th class="pt-0">profile</th>
+                <th class="pt-0">user name</th>
+                <th class="pt-0">gender</th>
+                <th class="pt-0">authorities</th>
+                <th class="pt-0">blood Type</th>
+                <th class="pt-0">location</th>
+              </tr>
+            </thead>
+            <tbody class="text-capitalize">
+              <tr *ngFor="let user of myUsers; let i = index" class="cursor-pointer " (click)="openDialog(user)">
+                <td>{{i+1}}</td>
+                <td class="pt-2" *ngIf="user.gender=='male'"><img src="../../../../assets/img/BG/undraw_male_avatar_g98d.svg" class="rounded-circle wd-35" alt="user"></td>
+                <td class="pt-2" *ngIf="user.gender!='male'"><img src="../../../../assets/img/BG/undraw_female_avatar_efig.svg" class="rounded-circle wd-35" alt="user"></td>
+                <td>{{user.firstname}}</td>
+                <td>{{user.gender}}</td>
+                <td>{{user.authorities[1] ? 'admin' : 'user'}}</td>
+                <td>{{user.bloodType}}</td>
+                <td>{{user.country + ','+ user.city}}</td>
+              </tr>
+            </tbody>
+            <tfoot>
+              <tr>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<app-note [data]="parentData" class="my-note position-fixed" *ngIf="this._note.toggelNote"></app-note>
