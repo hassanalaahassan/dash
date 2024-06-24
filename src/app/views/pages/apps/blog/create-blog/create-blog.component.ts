@@ -130,8 +130,11 @@ export class CreateBlogComponent implements OnInit {
       // Call the service to create a blog
       this._blogService.createBlog(this.blogForm.value).subscribe({
         next: (response) => {
+          formData.append('id',response.id);
+
           // If blog creation is successful, add image
-          this.addImage(formData, response.id);
+          this.addImage(formData);
+          this.imageName=''
         },
         error: (err) => {
           // If there's an error, show error message
@@ -142,8 +145,8 @@ export class CreateBlogComponent implements OnInit {
   }
 
   // Function to add image to the created blog
-  addImage(model: any, id: string): void {
-    this._blogService.putImage(model, id).subscribe({
+  addImage(model: any): void {
+    this._blogService.putImage(model).subscribe({
       next: (response) => {
         // If image upload is successful, show success message
         this.handleSuccessMessage('Blog Created Successfully');

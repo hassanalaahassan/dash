@@ -33,4 +33,7 @@ export class EmergencyService {
     }
     return this._HttpClient.put(environment.baseApi.replace('auth','admin')+`emergency/update`,emerg)
   }
+  putImage(model:any):Observable<any>{
+    return this._HttpClient.post(environment.baseApi.replace('auth','admin')+`emergency/image`,model)
+  }
 }

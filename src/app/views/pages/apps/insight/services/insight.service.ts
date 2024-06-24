@@ -40,11 +40,8 @@ export class InsightService {
   deleteInsight(id:string):Observable<any>{
     return this._HttpClient.delete(environment.baseApi.replace('auth','admin')+`insight/delete?id=${id}`)
   }
-  putImage(model:any,id:string):Observable<any>{
-    const finalModel={
-      model
-    }
-    return this._HttpClient.post(environment.baseApi.replace('auth','admin')+`insight/image?id=${id}`,finalModel)
+  putImage(model:any):Observable<any>{
+    return this._HttpClient.post(environment.baseApi.replace('auth','admin')+`insight/image`,model)
   }
 }
 

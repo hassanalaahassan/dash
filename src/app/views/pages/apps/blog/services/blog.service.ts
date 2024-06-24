@@ -32,11 +32,8 @@ export class BlogService {
   getAllBlogs():Observable<any>{
     return this._HttpClient.get(environment.baseApi.replace('auth','user') + `blog/getAll`)
   }
-  putImage(model:any,id:string):Observable<any>{
-    const finalModel={
-      frontMatter:model
-    }
-    return  this._HttpClient.post(environment.baseApi.replace('auth','admin')+`blog/image?id=${id}`,model)
+  putImage(model:any):Observable<any>{
+    return  this._HttpClient.post(environment.baseApi.replace('auth','admin')+`blog/image`,model)
   }
   deleteBlog(id:string):Observable<any>{
     return this._HttpClient.delete(environment.baseApi.replace('auth','admin') + `blog/delete?id=${id}`)

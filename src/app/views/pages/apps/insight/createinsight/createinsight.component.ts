@@ -42,11 +42,12 @@ export class CreateinsightComponent {
       // Call the InsightService to create a new insight
       this._InsightService.createInsight(this.insightForm.value).subscribe({
         next: (response) => {
+          formData.append('id',response.id);
           // Add the image to the created insight
-          this.addImage(formData, response.id);
+          this.addImage(formData);
           // Reset the form after successful submission
           this.insightForm.reset('');
-          
+
           this.imageName=''
         }
       });
@@ -54,9 +55,9 @@ export class CreateinsightComponent {
   }
 
   // Add image to an insight
-  addImage(model: any, id: string): void {
+  addImage(model: any): void {
     // Call the InsightService to upload the image
-    this._InsightService.putImage(model, id).subscribe({
+    this._InsightService.putImage(model).subscribe({
       next: (response) => {
         // refresh the insights
         this._InsightService.assignInsights();
